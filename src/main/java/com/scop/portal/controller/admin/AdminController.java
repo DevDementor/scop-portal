@@ -1,9 +1,12 @@
 package com.scop.portal.controller.admin;
 
+import com.scop.portal.common.email.EmailService;
+import com.scop.portal.common.email.EmailVO;
 import com.scop.portal.domain.admin.Admin;
 import com.scop.portal.service.admin.AdminService;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -26,6 +29,7 @@ import org.springframework.web.bind.annotation.*;
 public class AdminController {
     private final String viewUrl = "/views/admin";
     private AdminService adminService;
+    private EmailService emailService;
 
     /**
      * 메인 화면 조회
@@ -34,8 +38,17 @@ public class AdminController {
      * @return the string
      */
     @GetMapping
-    public String adminList(Model model){
+    public String adminList(Model model) {
         model.addAttribute("list", adminService.getAdminList());
+
+        EmailVO emailVO = EmailVO.builder()
+                .to("dementor0711@gmail.com")
+                .subject("이메일 테스트")
+                .message("이메일 테스트 본문")
+                .build();
+
+        emailService.sendMail(emailVO);
+
         return viewUrl + "/adminList";
     }
 
@@ -45,9 +58,9 @@ public class AdminController {
      * @return the string
      */
     @GetMapping("/{adminId}")
-    public String adminDtl(){
+    public String adminDtl() {
 
-        return viewUrl +"/adminDtl";
+        return viewUrl + "/adminDtl";
     }
 
     /**
@@ -58,9 +71,9 @@ public class AdminController {
      * @return the string
      */
     @GetMapping("/editAdmin/{adminId}")
-    public String editAdmin(@PathVariable String adminId, Model model){
+    public String editAdmin(@PathVariable String adminId, Model model) {
 
-        return viewUrl+"/editAdmin";
+        return viewUrl + "/editAdmin";
     }
 
     /**
@@ -70,7 +83,7 @@ public class AdminController {
      * @return the string
      */
     @PostMapping("/editAdmin/{adminId}")
-    public String editAdmin(@ModelAttribute Admin admin){
+    public String editAdmin(@ModelAttribute Admin admin) {
 
         return "/redirect:admin";
     }
@@ -81,7 +94,7 @@ public class AdminController {
      * @return the string
      */
     @GetMapping("/addAdmin")
-    public String addAdmin(){
+    public String addAdmin() {
         log.info("");
 
         return "";
@@ -95,12 +108,11 @@ public class AdminController {
      */
     @PostMapping("/addAdmin")
     @ResponseBody
-    public Object addAdmin(@ModelAttribute Admin admin){
+    public Object addAdmin(@ModelAttribute Admin admin) {
         log.info("addAdmin = {}", admin);
 
         return "ok";
     }
-
 
 
 }

@@ -49,8 +49,8 @@ public class AdminController {
      * @param model the model
      * @return the string
      */
-    @GetMapping("/addAdmin")
-    public String addAdmin(Model model){
+    @GetMapping("/createAdmin")
+    public String createAdmin(Model model){
         model.addAttribute("admin", new Admin());
         return viewUrl+"/addAdmin";
     }
@@ -61,9 +61,9 @@ public class AdminController {
      * @param admin the admin
      * @return the object
      */
-    @PostMapping("/addAdmin")
-    public String addAdmin(@ModelAttribute Admin admin){
-        adminService.addAdmin(admin);
+    @PostMapping("/createAdmin")
+    public String createAdmin(@ModelAttribute Admin admin){
+        adminService.createAdmin(admin);
         return "redirect:/admin";
     }
 
@@ -109,9 +109,9 @@ public class AdminController {
      * @param admin the admin
      * @return the object
      */
-    @GetMapping("/chkIdDup")
+    @GetMapping("/idDupChk")
     @ResponseBody
-    public Object chkIdDup(Admin admin){
+    public Object idDupChk(Admin admin){
         return "";
     }
 

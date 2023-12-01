@@ -18,5 +18,5 @@ import java.util.List;
 public interface AdminService {
     public List<Admin> adminList();
 
-    public void addAdmin(Admin admin);
+    public void createAdmin(Admin admin);
 }

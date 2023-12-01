@@ -22,11 +22,8 @@ import java.util.List;
 @Mapper
 public interface AdminMapper {
     public List<Admin> adminList();
-
-    public void createAdmin(Admin admin);
+    public int createAdmin(Admin admin);
     public Admin readAdmin(Admin admin);
-
-    public void updateAdmin(Admin admin);
-
+    public int updateAdmin(Admin admin);
     public void deleteAdmin(Admin admin);
 }

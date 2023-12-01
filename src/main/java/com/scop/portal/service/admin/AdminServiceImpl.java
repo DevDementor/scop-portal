@@ -37,9 +37,9 @@ public class AdminServiceImpl implements AdminService{
 
     @Override
     @Transactional
-    public void addAdmin(Admin admin) {
+    public void createAdmin(Admin admin) {
         admin.setPassword(passwordEncoder.encode(admin.getPassword()));
         log.info("admin={}", admin);
-        adminMapper.addAdmin(admin);
+        adminMapper.createAdmin(admin);
     }
 }

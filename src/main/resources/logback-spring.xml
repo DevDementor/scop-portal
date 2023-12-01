@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <configuration>
     <!-- 로그 경로 변수 선언 -->
-    <property name="LOG_DIR" value="./home/LogFiles/Application" />
+    <property name="LOG_DIR" value="D:/home/LogFiles/Application" />
     <property name="LOG_PATH" value="${LOG_DIR}/scop_portal.log"/>
     <property name="FILE_LOG_PATTERN" value="%d{yyyy-MM-dd HH:mm:ss.SSS} [%-5level] [%thread %F:%L] %method - %msg%n"/>
     <property name="CONSOLE_LOG_PATTERN" value="%d{yyyy-MM-dd HH:mm:ss}, %t, %-5level, %c{0}:%L, , %msg%n"/>

@@ -18,7 +18,7 @@ public class SecurityConfig {
 
     @Bean
     PasswordEncoder passwordEncoder(){
-        return new SimplePasswordEncoder();
+        return new BCryptPasswordEncoder();
     }
 
     @Bean
@@ -26,19 +26,19 @@ public class SecurityConfig {
         http.httpBasic(HttpBasicConfigurer::disable)
                 .csrf(CsrfConfigurer::disable).authorizeHttpRequests(request -> request
                         .dispatcherTypeMatchers(DispatcherType.FORWARD).permitAll()
+                        .requestMatchers("/admin/addAdmin", "/static/css/**", "/static/images/**").permitAll()
 //                        .requestMatchers(new MvcRequestMatcher(introspector, "/login*")).permitAll()
                         .anyRequest().authenticated()
                 )
                 .formLogin(login -> login
                         .loginPage("/login")
                         .loginProcessingUrl("/loginProc")
-                        .usernameParameter("memberId")
-                        .passwordParameter("memberPw")
+                        .usernameParameter("adminId")
+                        .passwordParameter("adminPw")
                         .defaultSuccessUrl("/dashboard", true)
                         .permitAll()
                 )
                 .logout(withDefaults());
-
         return http.build();
     }
 }

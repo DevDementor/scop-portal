@@ -5,7 +5,8 @@ import lombok.AllArgsConstructor;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 
 /**
  *
@@ -21,10 +22,5 @@ public class LoginController {
     @GetMapping("")
     public String main(){
         return viewUrl + "/login";
-    }
-
-    @GetMapping("/join")
-    public String join(){
-        return viewUrl + "/join";
     }
 }

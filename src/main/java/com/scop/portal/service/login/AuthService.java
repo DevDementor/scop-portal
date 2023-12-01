@@ -1,10 +1,8 @@
 package com.scop.portal.service.login;
 
-import com.scop.portal.domain.Member;
+import com.scop.portal.domain.admin.Admin;
 
 
 public interface AuthService {
-
-    public void createUser(Member member);
-    public Member selectUser(String userId);
+    public Admin selectUser(String userId);
 }

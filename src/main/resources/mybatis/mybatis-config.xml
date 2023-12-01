@@ -10,5 +10,6 @@
 
     <typeAliases>
         <typeAlias alias="Member" type="Member"/>
+        <typeAlias alias="Admin" type="com.scop.portal.domain.admin.Admin"/>
     </typeAliases>
 </configuration>

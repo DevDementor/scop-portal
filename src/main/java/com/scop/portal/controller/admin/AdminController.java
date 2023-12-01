@@ -2,8 +2,10 @@ package com.scop.portal.controller.admin;
 
 import com.scop.portal.domain.admin.Admin;
 import com.scop.portal.service.admin.AdminService;
-import lombok.AllArgsConstructor;
+import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
+import org.springframework.security.core.userdetails.User;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -22,21 +24,47 @@ import org.springframework.web.bind.annotation.*;
 @Slf4j
 @Controller
 @RequestMapping("/admin")
-@AllArgsConstructor
+@RequiredArgsConstructor
 public class AdminController {
     private final String viewUrl = "/views/admin";
-    private AdminService adminService;
+    private final AdminService adminService;
 
     /**
-     * 메인 화면 조회
+     * 메인 화면 리스트 조회
      *
      * @param model the model
      * @return the string
      */
     @GetMapping
-    public String adminList(Model model){
-        model.addAttribute("list", adminService.getAdminList());
+    public String adminList(@AuthenticationPrincipal User user, Model model){
+        log.info("User = {}", user);
+        model.addAttribute("admin", user);
+        model.addAttribute("list", adminService.adminList());
         return viewUrl + "/adminList";
+    }
+
+    /**
+     * 운영자 등록 화면
+     *
+     * @param model the model
+     * @return the string
+     */
+    @GetMapping("/addAdmin")
+    public String addAdmin(Model model){
+        model.addAttribute("admin", new Admin());
+        return viewUrl+"/addAdmin";
+    }
+
+    /**
+     * 운영자 등록
+     *
+     * @param admin the admin
+     * @return the object
+     */
+    @PostMapping("/addAdmin")
+    public String addAdmin(@ModelAttribute Admin admin){
+        adminService.addAdmin(admin);
+        return "redirect:/admin";
     }
 
     /**
@@ -69,38 +97,28 @@ public class AdminController {
      * @param admin the admin
      * @return the string
      */
-    @PostMapping("/editAdmin/{adminId}")
+    @PostMapping("/editAdmin")
     public String editAdmin(@ModelAttribute Admin admin){
 
         return "/redirect:admin";
     }
 
     /**
-     * 운영자 등록 화면
-     *
-     * @return the string
-     */
-    @GetMapping("/addAdmin")
-    public String addAdmin(){
-        log.info("");
-
-        return "";
-    }
-
-    /**
-     * 운영자 등록
+     * ID 중복 체크
      *
      * @param admin the admin
      * @return the object
      */
-    @PostMapping("/addAdmin")
+    @GetMapping("/chkIdDup")
     @ResponseBody
-    public Object addAdmin(@ModelAttribute Admin admin){
-        log.info("addAdmin = {}", admin);
-
-        return "ok";
+    public Object chkIdDup(Admin admin){
+        return "";
     }
 
+    @PostMapping("/updatePw")
+    @ResponseBody
+    public Object updatePw(Admin admin){
 
-
+        return "";
+    }
 }

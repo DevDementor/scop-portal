@@ -1,6 +1,6 @@
 package com.scop.portal.dao.login;
 
-import com.scop.portal.domain.Member;
+import com.scop.portal.domain.admin.Admin;
 import org.apache.ibatis.annotations.Mapper;
 import org.springframework.stereotype.Repository;
 
@@ -8,6 +8,5 @@ import org.springframework.stereotype.Repository;
 @Mapper
 public interface AuthMapper {
     public int join();
-
-    public Member selectUser(String userId);
+    public Admin selectUser(String userId);
 }

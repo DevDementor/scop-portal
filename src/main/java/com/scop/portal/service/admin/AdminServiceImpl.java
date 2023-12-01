@@ -2,7 +2,9 @@ package com.scop.portal.service.admin;
 
 import com.scop.portal.dao.admin.AdminMapper;
 import com.scop.portal.domain.admin.Admin;
-import lombok.AllArgsConstructor;
+import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -19,15 +21,25 @@ import java.util.List;
  * -----------------------------------------------------------
  * 2023-11-23        Mr.Lee      최초 생성
  */
+@Slf4j
 @Service
-@AllArgsConstructor
+@RequiredArgsConstructor
 public class AdminServiceImpl implements AdminService{
 
-    AdminMapper adminMapper;
+    private final AdminMapper adminMapper;
+    private final PasswordEncoder passwordEncoder;
 
     @Override
     @Transactional(readOnly = true)
-    public List<Admin> getAdminList() {
-        return adminMapper.getAdminList();
+    public List<Admin> adminList() {
+        return adminMapper.adminList();
+    }
+
+    @Override
+    @Transactional
+    public void addAdmin(Admin admin) {
+        admin.setPassword(passwordEncoder.encode(admin.getPassword()));
+        log.info("admin={}", admin);
+        adminMapper.addAdmin(admin);
     }
 }

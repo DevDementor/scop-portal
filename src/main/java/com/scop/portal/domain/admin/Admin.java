@@ -2,8 +2,6 @@ package com.scop.portal.domain.admin;
 
 import lombok.Data;
 
-import java.util.Date;
-
 /**
  * packageName    : com.scop.portal.domain.admin
  * fileName       : Admin
@@ -15,12 +13,14 @@ import java.util.Date;
  * -----------------------------------------------------------
  * 2023-11-23        Mr.Lee      최초 생성
  */
+
 @Data
-public class Admin {
+public class Admin{
     private String adminId;
-    private String adminNm;
+    private String adminName;
     private String telNo;
     private String password;
     private String memo;
-
+    private String createDate;
+    private String updateDate;
 }

@@ -2,9 +2,27 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.scop.portal.dao.admin.AdminMapper">
 
-	<select id="getAdminList" parameterType="Map" resultType="com.scop.portal.domain.admin.Admin">
+	<select id="createAdmin" parameterType="Admin" resultType="Admin">
 		SELECT *
 		  FROM ADMIN
 	</select>
+
+	<select id="selectAdmin" parameterType="Admin" resultType="Admin">
+		select * from ADMIN
+		where ADMINID = #{adminId}
+	</select>
+
+	<insert id="readAdmin" parameterType="Admin">
+		insert into ADMIN (adminId,adminName,telNo,createDate,updateDate,password,memo)
+		values(#{adminId},#{adminName}, #{telNo}, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, #{password}, #{memo})
+	</insert>
+
+	<update id="updateAdmin" parameterType="Admin">
+
+	</update>
+
+	<delete id="deleteAdmin" parameterType="Admin">
+
+	</delete>
 
 </mapper>

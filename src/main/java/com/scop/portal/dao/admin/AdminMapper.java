@@ -5,7 +5,6 @@ import org.apache.ibatis.annotations.Mapper;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
-import java.util.Map;
 
 /**
  * packageName    : com.scop.portal.dao.admin
@@ -22,5 +21,12 @@ import java.util.Map;
 @Repository
 @Mapper
 public interface AdminMapper {
-    public List<Admin> getAdminList();
+    public List<Admin> adminList();
+
+    public void createAdmin(Admin admin);
+    public Admin readAdmin(Admin admin);
+
+    public void updateAdmin(Admin admin);
+
+    public void deleteAdmin(Admin admin);
 }

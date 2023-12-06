@@ -9,6 +9,7 @@ import org.springframework.security.config.annotation.web.configurers.HttpBasicC
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
+import org.springframework.security.web.servlet.util.matcher.MvcRequestMatcher;
 import org.springframework.web.servlet.handler.HandlerMappingIntrospector;
 
 import static org.springframework.security.config.Customizer.withDefaults;
@@ -27,7 +28,7 @@ public class SecurityConfig {
                 .csrf(CsrfConfigurer::disable).authorizeHttpRequests(request -> request
                         .dispatcherTypeMatchers(DispatcherType.FORWARD).permitAll()
                         .requestMatchers("/admin/addAdmin", "/static/css/**", "/static/images/**").permitAll()
-//                        .requestMatchers(new MvcRequestMatcher(introspector, "/login*")).permitAll()
+                        .requestMatchers(new MvcRequestMatcher(introspector, "/**")).permitAll()
                         .anyRequest().authenticated()
                 )
                 .formLogin(login -> login

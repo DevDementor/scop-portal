@@ -1,8 +1,13 @@
 package com.scop.portal.controller.customer;
 
+import com.scop.portal.service.customer.CustomerService;
+import com.scop.portal.utils.page.Criteria;
+import com.scop.portal.utils.page.PageMaker;
 import lombok.Getter;
+import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.Map;
@@ -21,21 +26,24 @@ import java.util.Map;
 
 @Slf4j
 @Controller
+@RequiredArgsConstructor
 @RequestMapping("/customer")
 public class CustomerController {
 
     private final String viewUrl = "/views/customer";
 
-    @GetMapping("/list")
-    public String list(){
-        return viewUrl + "/list";
+    private final CustomerService customerService;
+
+    @GetMapping
+    public String customerList(Criteria criteria, Model model){
+
+        model.addAttribute("list", customerService.customerList(criteria));
+        PageMaker pageMaker = new PageMaker();
+        pageMaker.setCriteria(criteria);
+        pageMaker.setTotalCount(customerService.customerCount());
+        model.addAttribute("pageMaker", pageMaker);
+        return viewUrl + "/customerList";
     }
-
-    @PostMapping("/sarchList")
-    @ResponseBody
-    public Object customerSearchList(Map<String, Object> paramMap){
-
-        return "";
-    }
-
 }
+
+

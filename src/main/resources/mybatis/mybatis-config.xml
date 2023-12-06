@@ -9,7 +9,7 @@
     </settings>
 
     <typeAliases>
-        <typeAlias alias="Member" type="Member"/>
+        <typeAlias alias="Customer" type="com.scop.portal.domain.customer.Customer"/>
         <typeAlias alias="Admin" type="com.scop.portal.domain.admin.Admin"/>
     </typeAliases>
 </configuration>

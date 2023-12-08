@@ -1,5 +1,7 @@
 package com.scop.portal.utils.page;
 
+import lombok.Data;
+
 /**
  * packageName    : com.scop.portal.utils.page
  * fileName       : Criteria
@@ -14,6 +16,8 @@ package com.scop.portal.utils.page;
 public class Criteria {
     private int page;
     private int perPageNum;
+
+    private String searchCustName;
 
     public Criteria(){
         this.page = 1;
@@ -48,6 +52,14 @@ public class Criteria {
 
     public int getPerPageNum(){
         return this.perPageNum;
+    }
+
+    public void setSearchCustName(String searchCustName) {
+        this.searchCustName = searchCustName;
+    }
+
+    public String getSearchCustName(){
+        return this.searchCustName;
     }
 
     @Override

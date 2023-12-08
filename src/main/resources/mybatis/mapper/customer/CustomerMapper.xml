@@ -5,12 +5,36 @@
     <select id="customerList" resultType="Customer">
         select *
         from customer
+        where 1=1
+        <if test="searchCustName != null and searchCustName != ''">
+        and name = #{searchCustName}
+        </if>
         order by id asc
-        limit #{pageStart}, #{perPageNum}
+            limit #{pageStart}, #{perPageNum}
     </select>
 
     <select id="customerCount" resultType="int">
-        select count(1) from customer
+        select count(1)
+        from customer
+        where 1=1
+        <if test="searchCustName != null and searchCustName != ''">
+            and name = #{searchCustName}
+        </if>
     </select>
+
+    <select id="readCustomer" resultType="Customer">
+        select id          as id
+             , name        as name
+             , create_time as createTime
+        from customer
+        where id = #{customerId}
+    </select>
+
+    <update id="updateCustomer" parameterType="Customer">
+        update customer
+        set name        = #{name}
+          , create_time = current_timestamp()
+        where id = #{id}
+    </update>
 
 </mapper>

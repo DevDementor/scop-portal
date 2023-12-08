@@ -5,7 +5,10 @@
     <link href="../css/bootstrap.min.css"
           rel="stylesheet" th:href="@{/css/bootstrap.min.css}">
     <script th:src="@{/js/jquery/jquery-3.7.1.min.js}" type="text/javascript"></script>
-    <script th:src="@{/js/customer/customerList.js}" type="text/javascript"></script>
+    <script th:inline="javascript">
+        let perPageNum = [[${pageMaker.criteria.perPageNum}]]
+    </script>
+    <script th:src="@{/js/customer/customerList.js}"></script>
 </head>
 <body>
 
@@ -17,22 +20,25 @@
             <tr>
                 <th>ID</th>
                 <th>이름</th>
-                <th>전화번호</th>
             </tr>
             </thead>
             <tbody>
             <tr th:each="customer : ${list}">
-                <td><a href="item.html" th:text="${customer.id}"></a></td>
-                <td><a href="item.html" th:text="${customer.name}"></a></td>
+                <td><a th:href="@{/customer/{customerId}(customerId = ${customer.id})}" th:text="${customer.id}"></a>
+                </td>
+                <td><a th:href="@{/customer/{customerId}(customerId = ${customer.id})}" th:text="${customer.name}"></a>
+                </td>
             </tr>
             </tbody>
         </table>
     </div>
     <div class="text-center">
         <form id="pagingForm">
-            <input type="hidden" name="perPageNum" value="">
+            고객명 : <input name="searchCustName" type="text">
+            <input name="perPageNum" type="hidden" value="">
+            <input type="submit" onclick="search()" value="검색">
         </form>
-        <select id="perPageNum" class="form-select">
+        <select class="form-select" id="selePerPageNum" th:onchange="selPerPageNum(this.value)">
             <option value="10">10</option>
             <option value="20">20</option>
             <option value="30">30</option>
@@ -44,7 +50,8 @@
 
             <th:block th:with="start = ${pageMaker.startPage}, end=${pageMaker.endPage}">
                 <li th:each="pageNum : ${#numbers.sequence(start, end)}">
-                    <a th:href="@{customer(page=${pageNum}, perPageNum=${pageMaker.criteria.perPageNum})}" th:text="${pageNum}"></a>
+                    <a th:href="@{customer(page=${pageNum}, perPageNum=${pageMaker.criteria.perPageNum})}"
+                       th:text="${pageNum}"></a>
                 </li>
             </th:block>
 

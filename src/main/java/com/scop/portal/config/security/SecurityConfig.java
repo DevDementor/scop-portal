@@ -1,6 +1,7 @@
 package com.scop.portal.config.security;
 
 import jakarta.servlet.DispatcherType;
+import org.springframework.boot.autoconfigure.security.servlet.PathRequest;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
@@ -25,9 +26,10 @@ public class SecurityConfig {
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http, HandlerMappingIntrospector introspector) throws Exception {
         http.httpBasic(HttpBasicConfigurer::disable)
-                .csrf(CsrfConfigurer::disable).authorizeHttpRequests(request -> request
+                .csrf(CsrfConfigurer::disable)
+                .authorizeHttpRequests(request -> request
                         .dispatcherTypeMatchers(DispatcherType.FORWARD).permitAll()
-                        .requestMatchers("/admin/addAdmin", "/static/css/**", "/static/images/**").permitAll()
+                        .requestMatchers(PathRequest.toStaticResources().atCommonLocations()).permitAll()
                         .requestMatchers(new MvcRequestMatcher(introspector, "/**")).permitAll()
                         .anyRequest().authenticated()
                 )

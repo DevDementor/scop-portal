@@ -26,7 +26,6 @@ class PortalApplicationTests {
         for(Customer customer : list){
             log.info("customer id ={}",customer.getId());
             log.info("customer name ={}",customer.getName());
-            log.info("customer create time ={}",customer.getCreate_time());
         }
 
     }

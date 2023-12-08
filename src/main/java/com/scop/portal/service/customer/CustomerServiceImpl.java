@@ -24,7 +24,6 @@ import java.util.List;
 @Service
 @RequiredArgsConstructor
 public class CustomerServiceImpl implements CustomerService{
-
     private final CustomerMapper customerMapper;
     @Override
     public List<Customer> customerList(Criteria criteria) {
@@ -32,7 +31,11 @@ public class CustomerServiceImpl implements CustomerService{
     }
 
     @Override
-    public int customerCount() {
-        return customerMapper.customerCount();
+    public int customerCount(Criteria criteria) {
+        return customerMapper.customerCount(criteria);
+    }
+    @Override
+    public Customer readCustomer(String customerId){
+        return customerMapper.readCustomer(customerId);
     }
 }

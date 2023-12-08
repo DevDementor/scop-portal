@@ -17,5 +17,5 @@ import lombok.Data;
 public class Customer {
     private String id;
     private String name;
-    private String create_time;
+    private String createTime;
 }

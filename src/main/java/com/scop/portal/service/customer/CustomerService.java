@@ -19,5 +19,7 @@ import java.util.List;
 public interface CustomerService {
     List<Customer> customerList(Criteria criteria);
 
-    int customerCount();
+    int customerCount(Criteria criteria);
+
+    Customer readCustomer(String customerId);
 }

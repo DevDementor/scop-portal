@@ -25,5 +25,7 @@ import java.util.List;
 public interface CustomerMapper {
     public List<Customer> customerList(Criteria criteria);
 
-    public int customerCount();
+    public int customerCount(Criteria criteria);
+
+    public Customer readCustomer(String customerId);
 }

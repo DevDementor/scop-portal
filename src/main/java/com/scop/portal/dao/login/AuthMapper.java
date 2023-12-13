@@ -8,5 +8,5 @@ import org.springframework.stereotype.Repository;
 @Mapper
 public interface AuthMapper {
     public int join();
-    public Admin selectUser(String userId);
+    public Admin selectAdmin(String adminId);
 }

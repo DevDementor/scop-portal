@@ -4,5 +4,5 @@ import com.scop.portal.domain.admin.Admin;
 
 
 public interface AuthService {
-    public Admin selectUser(String userId);
+    public Admin selectAdmin(String adminId);
 }

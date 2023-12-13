@@ -1,26 +1,40 @@
 package com.scop.portal.controller.login;
 
+import com.scop.portal.domain.admin.Admin;
 import com.scop.portal.service.login.AuthService;
 import lombok.AllArgsConstructor;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 
-/**
- *
- */
+@Slf4j
 @Controller
 @RequestMapping("/login")
 @AllArgsConstructor
 public class LoginController {
-    private final Logger log = LoggerFactory.getLogger(this.getClass());
     private final AuthService authService;
-    private final String viewUrl =  "/views/login";
+    private final String viewUrl = "/views/login";
 
     @GetMapping("")
-    public String main(){
+    public String main() {
         return viewUrl + "/login";
     }
+
+    @GetMapping("/findId")
+    public String findId(){
+        return viewUrl + "/findId";
+    }
+
+    @PostMapping("/findId")
+    @ResponseBody
+    public Object findId(@RequestBody Admin admin){
+        return "";
+    }
+
+    @GetMapping("/findPw")
+    public String findPw(){
+        return viewUrl + "/findPw";
+    }
 }
+
+

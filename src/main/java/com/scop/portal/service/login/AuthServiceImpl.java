@@ -12,7 +12,7 @@ public class AuthServiceImpl implements AuthService {
 
     private final AuthMapper authMapper;
     @Override
-    public Admin selectUser(String userId) {
-        return authMapper.selectUser(userId);
+    public Admin selectAdmin(String adminId) {
+        return authMapper.selectAdmin(adminId);
     }
 }

@@ -1,19 +1,27 @@
 <!DOCTYPE html>
-<html lang="en">
+<html
+        layout:decorate="~{/views/layout/mainLayout}"
+        xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+        xmlns:th="http://www.thymeleaf.org">
 <head>
-    <meta charset="UTF-8">
-    <title>Title</title>
+    <!--    <script th:src="@{/js/login/login.js}"></script>-->
+    <script th:inline="javascript">
+        // const msg = "[(#{msg.login.error.user_id})]";
+    </script>
 </head>
 <body>
+<th:block layout:fragment="content">
     <h1>Login</h1>
     <form action="/loginProc" method="post">
-        아이디<input type="text" name="adminId"/>
-        <p></p>
-        패스워드<input type="password" name="adminPw"/>
+        아이디<input id="adminId" name="adminId" type="text"/>
+        <p id="validateId" style="color: red; visibility: hidden " th:text="#{msg.login.error.user_id}"></p>
+        패스워드<input id="adminPw" name="adminPw" type="password"/>
         <button type="submit">로그인</button>
     </form>
     <div>
-        <a href="http://localhost:9530/admin/addAdmin">회원가입</a>
+        <a th:href="@{/login/findId}">아이디 찾기</a>
+        <a th:href="@{/login/findPw}">비밀번호 찾기</a>
     </div>
+</th:block>
 </body>
 </html>

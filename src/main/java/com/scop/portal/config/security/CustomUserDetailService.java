@@ -19,7 +19,7 @@ public class CustomUserDetailService implements UserDetailsService {
 
     @Override
     public UserDetails loadUserByUsername(String memberId) throws UsernameNotFoundException {
-        Optional<Admin> findOne = Optional.ofNullable(authService.selectUser(memberId));
+        Optional<Admin> findOne = Optional.ofNullable(authService.selectAdmin(memberId));
         Admin admin = findOne.orElseThrow(() -> new UsernameNotFoundException("존재하지 않는 회원입니다."));
 
         return User.builder()

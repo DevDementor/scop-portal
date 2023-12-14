@@ -2,6 +2,7 @@ $(function(){
 
 });
 
+
 /*
 유효성 검사
  */
@@ -16,7 +17,7 @@ function validate(){
 
     if(isNull(pw)){
         //todo. 퍼블 나오면 적용
-        return 
+        return
     }
 }
 

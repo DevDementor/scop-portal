@@ -1,17 +1,22 @@
 package com.scop.portal.config.security;
 
 import com.scop.portal.domain.admin.Admin;
+import com.scop.portal.domain.admin.AdminContext;
 import com.scop.portal.service.login.AuthService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Optional;
 
-@Component
+@Service
 @RequiredArgsConstructor
 public class CustomUserDetailService implements UserDetailsService {
 
@@ -20,11 +25,11 @@ public class CustomUserDetailService implements UserDetailsService {
     @Override
     public UserDetails loadUserByUsername(String memberId) throws UsernameNotFoundException {
         Optional<Admin> findOne = Optional.ofNullable(authService.selectAdmin(memberId));
-        Admin admin = findOne.orElseThrow(() -> new UsernameNotFoundException("존재하지 않는 회원입니다."));
+        Admin admin = findOne.orElseThrow(() -> new UsernameNotFoundException("UsernameNotFoundException"));
 
-        return User.builder()
-                .username(admin.getAdminId())
-                .password(admin.getPassword())
-                .build();
+        List<SimpleGrantedAuthority> roles = new ArrayList<SimpleGrantedAuthority>();
+        roles.add(new SimpleGrantedAuthority("ROLE_ADMIN"));
+
+        return new AdminContext(admin, roles);
     }
 }

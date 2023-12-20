@@ -1,6 +1,7 @@
 package com.scop.portal.config.security;
 
 import jakarta.servlet.DispatcherType;
+import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.boot.autoconfigure.security.servlet.PathRequest;
 import org.springframework.context.annotation.Bean;
@@ -8,7 +9,6 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityCustomizer;
-import org.springframework.security.config.annotation.web.configurers.CsrfConfigurer;
 import org.springframework.security.config.annotation.web.configurers.HttpBasicConfigurer;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -16,12 +16,13 @@ import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 import org.springframework.web.servlet.handler.HandlerMappingIntrospector;
 
-import static org.springframework.security.config.Customizer.withDefaults;
-
 @Slf4j
 @Configuration
+@RequiredArgsConstructor
 @EnableWebSecurity
 public class SecurityConfig {
+    private final CustomAuthSuccessHandler customAuthSuccessHandler;
+    private final CustomAuthFailureHandler customAuthFailureHandler;
 
     @Bean
     PasswordEncoder passwordEncoder() {
@@ -31,26 +32,30 @@ public class SecurityConfig {
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http, HandlerMappingIntrospector introspector) throws Exception {
         http.httpBasic(HttpBasicConfigurer::disable)
-                .csrf(CsrfConfigurer::disable)
+//                .csrf(csrf -> csrf
+//                        .disable())
                 .authorizeHttpRequests(request -> request
                                 .dispatcherTypeMatchers(DispatcherType.FORWARD).permitAll()
                                 .requestMatchers(PathRequest.toStaticResources().atCommonLocations()).permitAll()
 //                        .requestMatchers(new MvcRequestMatcher(introspector, "/**")).permitAll()
                                 .anyRequest().authenticated()
                 )
-                .formLogin(login -> login
-                                .loginPage("/login")
-                                .loginProcessingUrl("/loginProc")
-                                .usernameParameter("adminId")
-                                .passwordParameter("password")
-//                                .defaultSuccessUrl("/dashboard", true)
-                                .successHandler(((request, response, authentication) -> {
-                                    log.info("authentication = {}", authentication.getDetails());
-                                    response.sendRedirect("/dashboard");
-                                }))
-                                .permitAll()
+                .formLogin(loginConfiture -> loginConfiture
+                        .loginPage("/login")
+                        .loginProcessingUrl("/loginProc")
+                        .usernameParameter("adminId")
+                        .passwordParameter("password")
+                        .successHandler(customAuthSuccessHandler)
+                        .failureHandler(customAuthFailureHandler)
+                        .permitAll()
                 )
-                .logout(withDefaults());
+                .logout(logoutConfigure -> logoutConfigure
+                        .logoutUrl("/logout")
+                        .logoutSuccessUrl("/")
+                        .invalidateHttpSession(true)
+                        .deleteCookies("JSESSIONID")
+                        .permitAll()
+                );
         return http.build();
     }
 

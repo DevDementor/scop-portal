@@ -34,8 +34,8 @@
                     </form>
                 </div>
                 <div class="link_area">
-                    <a class="btn link" href="#none">아이디 찾기</a>
-                    <a class="btn link" href="#none">비밀번호 찾기</a>
+                    <a class="btn link" th:href="@{/login/findId}">아이디 찾기</a>
+                    <a class="btn link" th:href="@{/login/findPw}">비밀번호 찾기</a>
                 </div>
             </div>
             <div class="footer">
@@ -44,6 +44,7 @@
         </div>
     </div>
     <script th:inline="javascript">
+        //spring message 값 변수 선언
         let msgErrorId = /*[[#{msg.login.error.user_id}]]*/'';
         let msgErrorPW = /*[[#{msg.login.error.password}]]*/'';
     </script>

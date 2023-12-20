@@ -1,30 +1,24 @@
-$(function(){
-
+$(function () {
 });
-
 
 /*
 유효성 검사
  */
-function validate(){
-    let id = $("#adminId").val();
-    let pw = $("#adminPw").val();
+function validate() {
+    let adminId = $('#adminId').val();
+    let password = $('#password').val();
 
-    if(isNull(id)){
-        //todo. 퍼블 나오면 적용
+    if (isNull(adminId)) {
+        $("#adminId").parent().addClass('error');
+        $('.error_msg').css('display','block');
+        $(".error_msg").text(msgErrorId);
         return false;
     }
 
-    if(isNull(pw)){
-        //todo. 퍼블 나오면 적용
-        return
-    }
-}
-
-function saveAction(){
-    alert("saveAction");
-
-    if(!validate()){
-
+    if (isNull(password)) {
+        $("#password").parent().addClass('error');
+        $('.error_msg').css('display','block');
+        $(".error_msg").text(msgErrorPW);
+        return false;
     }
 }

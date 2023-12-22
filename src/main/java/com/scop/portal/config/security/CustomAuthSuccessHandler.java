@@ -32,8 +32,8 @@ public class CustomAuthSuccessHandler extends SimpleUrlAuthenticationSuccessHand
         log.info("CustomAuthSuccessHandler onAuthenticationSuccess!!");
         // TODO: 2023-12-20
         /*
-            1.
-
+            1. 로그인 성공 날짜 업데이트
+            2. 계정 잠금 해제
          */
         response.sendRedirect(request.getContextPath() + "/dashboard");
     }

@@ -3,7 +3,7 @@
 <mapper namespace="com.scop.portal.dao.login.AuthMapper">
 
 	<select id="selectAdmin" parameterType="String" resultType="Admin">
-		SELECT
+		SELECT *
 		  FROM ADMIN
 		WHERE adminId = #{userId}
 	</select>

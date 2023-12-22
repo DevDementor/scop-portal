@@ -4,7 +4,6 @@
         xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
         xmlns:th="http://www.thymeleaf.org">
 <head>
-    <script th:src="@{scripts}"></script>
     <script th:inline="javascript">
         let perPageNum = [[${pageMaker.criteria.perPageNum}]]
     </script>
@@ -12,58 +11,144 @@
 </head>
 <body>
 <th:block layout:fragment="content">
-    <div class="container" style="max-width: 600px">
-        <hr class="my-4">
-        <div>
-            <table class="table">
+    <div class="page_title">
+        <p class="path"><span>홈</span><span class="path_01">고객사 관리</span></p> <!-- 텍스트가 동일한 LNB 메뉴가 자동 활성화됨 -->
+        <h2 class="h2">고객사 관리</h2>
+    </div>
+    <div class="content">
+        <div class="top_btn_area">
+            <!-- <a href="#none" class="btn icon type_01"><span class="icon_plus" aria-hidden="true"></span>버튼</a> -->
+            <a class="btn icon type_01 primary" href="#none"><span aria-hidden="true" class="icon_plus"></span>등록</a>
+        </div>
+        <!-- //top_btn_area -->
+
+        <div class="search_area">
+            <div class="search_row_01"> <!-- 줄바꿈 없이 1줄 고정 -->
+                <div class="search_item">
+                    <label>등록일시</label>
+                    <div class='input datetime_input type_02'>
+                        <input aria-label="Start date & time" type="datetime-local" value="2023-10-01T19:30">
+                    </div>
+                    <span class="mark type_02">−</span>
+                    <div class='input datetime_input type_02'>
+                        <input aria-label="End date & time" type="datetime-local" value="2023-10-31T19:30">
+                    </div>
+                </div>
+                <div class="search_item">
+                    <label>고객사 아이디</label>
+                    <div class="input type_02 s">
+                        <input placeholder="검색어 입력" type="text">
+                    </div>
+                </div>
+                <div class="search_item">
+                    <label>고객사 명</label>
+                    <div class="input type_02 s">
+                        <input placeholder="검색어 입력" type="text">
+                    </div>
+                </div>
+                <div class="search_item">
+                    <label>담당자 이름</label>
+                    <div class="input type_02 s">
+                        <input placeholder="검색어 입력" type="text">
+                    </div>
+                </div>
+            </div>
+            <div class="search_btn_area">
+                <button class="btn type_03" type="button"><span>검색</span></button>
+                <button class="btn icon stooltip" type="button">
+                    <span aria-hidden="true" class="icon_undo"></span>
+                    <span>초기화</span>
+                </button>
+            </div>
+        </div>
+
+        <div class="list_top_area">
+            <div class="top_left">
+                <div class="function_btn">
+                    <button class="btn icon type_06" type="button"><span aria-hidden="true"
+                                                                         class="icon_download"></span>Download
+                    </button>
+                </div>
+            </div>
+            <div class="top_right">
+                <div class="result_total">
+                    <span>1-100 of 1000</span>
+                </div>
+                <div class="pagination">
+                    <ul>
+                        <li><a class="btn first" href="#none"><span>처음</span></a></li>
+                        <li><a class="btn before" href="#none"><span>이전</span></a></li>
+                        <li><a class="on" href="#none"><span>1</span></a></li>
+                        <li><a href="#none"><span>200</span></a></li>
+                        <li><a href="#none"><span>300</span></a></li>
+                        <li><a href="#none"><span>400</span></a></li>
+                        <li><a href="#none"><span>500</span></a></li>
+                        <li><a href="#none"><span>600</span></a></li>
+                        <li><a href="#none"><span>700</span></a></li>
+                        <li><a href="#none"><span>800</span></a></li>
+                        <li><a href="#none"><span>900</span></a></li>
+                        <li><a href="#none"><span>1000</span></a></li>
+                        <li><a class="btn next" href="#none"><span>다음</span></a></li>
+                        <li><a class="btn last" href="#none"><span>마지막</span></a></li>
+                    </ul>
+                </div>
+                <div class="select type_02 xs">
+                    <select>
+                        <option selected>100 rows</option>
+                        <option>50 rows</option>
+                        <option>20 rows</option>
+                    </select>
+                </div>
+            </div>
+        </div>
+
+        <div class="table type_01 link">
+            <table>
+                <caption>검색 결과 목록</caption>
                 <thead>
                 <tr>
-                    <th>ID</th>
-                    <th>이름</th>
+                    <th scope="col">등록일시</th>
+                    <th scope="col">고객사 아이디</th>
+                    <th scope="col">고객사 명</th>
+                    <th scope="col">담당자 이름</th>
+                    <th scope="col">담당자 연락처</th>
+                    <th class="tac" scope="col">주차장</th>
+                    <th class="tac" scope="col">연동서버</th>
                 </tr>
                 </thead>
                 <tbody>
-                <tr th:each="customer : ${list}">
-                    <td><a th:href="@{/customer/{customerId}(customerId = ${customer.id})}"
-                           th:text="${customer.id}"></a>
+                <tr>
+                    <td>2023-10-23 09:00</td>
+                    <td>CUST010</td>
+                    <td><a class="btn link" href="#none">IKEA</a></td>
+                    <td>홍길동</td>
+                    <td>02-1234-5678</td>
+                    <td class="tac">
+                        <button class="btn type_07" type="button">조회</button>
                     </td>
-                    <td><a th:href="@{/customer/{customerId}(customerId = ${customer.id})}"
-                           th:text="${customer.name}"></a>
+                    <td class="tac">
+                        <button class="btn type_07 secondary" type="button">설정</button>
                     </td>
                 </tr>
                 </tbody>
             </table>
         </div>
-        <div class="text-center">
-            <form id="pagingForm">
-                고객명 : <input name="searchCustName" type="text">
-                <input name="perPageNum" type="hidden" value="">
-                <input onclick="search()" type="submit" value="검색">
-            </form>
-            <select class="form-select" id="selePerPageNum" th:onchange="selPerPageNum(this.value)">
-                <option value="10">10</option>
-                <option value="20">20</option>
-                <option value="30">30</option>
-            </select>
-            <ul class="pagination">
-                <th:block th:if="${pageMaker.prev}">
-                    <li><a th:href="@{customer(page=${pageMaker.startPage-1})}">&laquo;</a></li>
-                </th:block>
 
-                <th:block th:with="start = ${pageMaker.startPage}, end=${pageMaker.endPage}">
-                    <li th:each="pageNum : ${#numbers.sequence(start, end)}">
-                        <a th:href="@{customer(page=${pageNum}, perPageNum=${pageMaker.criteria.perPageNum})}"
-                           th:text="${pageNum}"></a>
-                    </li>
-                </th:block>
+        <!-- Loading -->
+        <!-- <div class="table type_01">
+            <div class="table_info">
+                <div class="loading type_02"><i></i><span class="hidden">Loading</span></div>
+            </div>
+        </div> -->
 
-                <th:block th:if="${pageMaker.next && pageMaker.endPage > 0}">
-                    <li><a th:href="@{customer(page=${pageMaker.endPage+1})}">&raquo;</a></li>
-                </th:block>
-            </ul>
-        </div>
+        <!-- No Data -->
+        <!-- <div class="table type_01">
+            <div class="table_info">
+                <div class="no_data">조건에 맞는 검색 결과가 없습니다.</div>
+            </div>
+        </div> -->
+    </div>
 
-    </div> <!-- /container -->
 </th:block>
 </body>
 </html>

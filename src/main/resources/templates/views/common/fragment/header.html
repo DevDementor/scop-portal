@@ -1,7 +1,29 @@
 <!DOCTYPE html>
 <html lang="en"
       xmlns:th="http://www.thymeleaf.org">
-<header th:fragment="header">
-    header
-</header>
+<div th:fragment="header">
+    <div class="header">
+        <h1 class="header_logo">
+            <a href="#none">SK shieldus - SCOP Portal</a>
+        </h1>
+        <!-- 로그인 후 메뉴 버튼 표시 -->
+        <button type="button" class="navi_btn btn icon stooltip">
+            <span class="icon_menu" aria-hidden="true"></span>
+            <span>Menu</span>
+        </button>
+
+        <div class="header_link">
+            <button type="button" class="btn icon stooltip user_btn">
+                <span class="icon_user2" aria-hidden="true"></span>
+                <span>나의 계정</span>
+            </button>
+            <div class="user_dropdown">
+                <p class="user">홍길동</p>
+                <p class="id">administrator</p>
+                <button type="button">내 정보</button>
+                <button type="button">로그아웃</button>
+            </div>
+        </div>
+    </div>
+</div>
 </html>

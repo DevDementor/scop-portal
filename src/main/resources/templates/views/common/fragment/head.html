@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta content="IE=edge" http-equiv="X-UA-Compatible">
     <meta content="telephone=no" name="format-detection"> <!-- 숫자값에 자동 링크 버그 제거 (Edge, mobile)-->
-    <!--    csrf 토큰   -->
+    <!--    security 설정으로 인한 csrf 토큰   -->
     <meta name="_csrf_header" th:content="${_csrf.headerName}">
     <meta name="_csrf" th:content="${_csrf.token}">
     <title>SCOP Portal</title>
@@ -16,5 +16,9 @@
     <script th:src="@{/scripts/nui/ui_common.js}"></script>
     <link rel="shortcut icon" th:href="@{/images/favicon.ico}" type="image/x-icon">
     <link rel="stylesheet" th:href="@{/styles/style.css}" type="text/css">
+    <script th:inline="javascript">
+        let csrfHeader = $('meta[name="_csrf_header"]').attr('content');
+        let csrfToken = $('meta[name="_csrf"]').attr('content');
+    </script>
 </th:block>
 </html>

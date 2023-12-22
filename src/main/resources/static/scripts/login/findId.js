@@ -1,29 +1,37 @@
-$(function(){
+$(function () {
+    $('form .btn').click(function () {
+        var data ={
+            "userEmail" : $("#userEmail").val(),
+            "userNm" : $("#userNm").val()
+        }
+        validate();
+        ajaxPost("/login/findId", data, function (res) {
+            console.log(res);
+            if(res == "SUCCESS"){
 
+            }else if(res == "NOT_EXISTS"){
+                $('.error_msg').removeClass('hide');
+            }
+        })
+    });
 });
 
-/*
-유효성 검사
- */
-function validate(){
-    let id = $("#adminId").val();
-    let pw = $("#adminPw").val();
 
-    if(isNull(id)){
-        //todo. 퍼블 나오면 적용
+function validate() {
+    let userEmail = $('#userEmail').val();
+    let userNm = $('#userNm').val();
+
+    if (isNull(userEmail)) {
+        $("#userEmail").parent().addClass('error');
+        $('.error_msg').removeClass('hide');
+        $(".error_msg").text(msgErrorId);
         return false;
     }
 
-    if(isNull(pw)){
-        //todo. 퍼블 나오면 적용
-        return 
-    }
-}
-
-function saveAction(){
-    alert("saveAction");
-
-    if(!validate()){
-
+    if (isNull(userNm)) {
+        $("#userNm").parent().addClass('error');
+        $('.error_msg').removeClass('hide');
+        $(".error_msg").text(msgErrorPW);
+        return false;
     }
 }

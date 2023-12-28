@@ -1,11 +1,11 @@
 $(function () {
     $('form .btn').click(function () {
-        var data ={
+        var params ={
             "userEmail" : $("#userEmail").val(),
             "userNm" : $("#userNm").val()
         }
         validate();
-        ajaxPost("/login/findId", data, function (res) {
+        ajaxPost("/login/findId", params, function (res) {
             console.log(res);
             if(res == "SUCCESS"){
 

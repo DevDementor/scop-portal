@@ -28,7 +28,7 @@ public class CustomUserDetailService implements UserDetailsService {
         Admin admin = findOne.orElseThrow(() -> new UsernameNotFoundException("UsernameNotFoundException"));
 
         List<SimpleGrantedAuthority> roles = new ArrayList<SimpleGrantedAuthority>();
-        roles.add(new SimpleGrantedAuthority("ROLE_ADMIN"));
+        roles.add(new SimpleGrantedAuthority("ROLE_ADMIN"));//권한 관리는 따로 하지 않기 때문에 임의로 지정
 
         return new AdminContext(admin, roles);
     }

@@ -44,9 +44,9 @@
         </div>
     </div>
     <script th:inline="javascript">
-        //spring message 값 변수 선언
-        let msgErrorId = /*[[#{msg.login.error.userId}]]*/'';
-        let msgErrorPW = /*[[#{msg.login.error.password}]]*/'';
+        //spring message 변수 선언
+        const msgErrorId = /*[[#{msg.login.error.userId}]]*/'';
+        const msgErrorPW = /*[[#{msg.login.error.password}]]*/'';
     </script>
     <script th:src="@{/scripts/login/login.js}"></script>
 </th:block>

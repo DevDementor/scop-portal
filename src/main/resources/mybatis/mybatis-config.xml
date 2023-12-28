@@ -14,7 +14,7 @@
     </settings>
 
     <typeAliases>
-        <typeAlias alias="Customer" type="com.scop.portal.domain.customer.Customer"/>
+        <typeAlias alias="CustComp" type="com.scop.portal.domain.customer.CustComp"/>
         <typeAlias alias="Admin" type="com.scop.portal.domain.admin.Admin"/>
     </typeAliases>
 </configuration>

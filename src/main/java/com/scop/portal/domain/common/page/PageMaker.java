@@ -1,4 +1,4 @@
-package com.scop.portal.utils.page;
+package com.scop.portal.domain.common.page;
 
 import lombok.Data;
 
@@ -7,7 +7,7 @@ import lombok.Data;
  * fileName       : PageMaker
  * author         : Mr.Lee
  * date           : 2023-12-05
- * description    :
+ * description    : 페이징시 사용 객체
  * ===========================================================
  * DATE              AUTHOR             NOTE
  * -----------------------------------------------------------

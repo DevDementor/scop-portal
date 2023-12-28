@@ -1,6 +1,13 @@
 package com.scop.portal.domain.admin;
 
 import lombok.Data;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.userdetails.User;
+
+import java.util.Collection;
 
 /**
  * packageName    : com.scop.portal.domain.admin

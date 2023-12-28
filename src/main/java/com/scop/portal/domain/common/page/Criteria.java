@@ -1,4 +1,4 @@
-package com.scop.portal.utils.page;
+package com.scop.portal.domain.common.page;
 
 import lombok.Data;
 
@@ -7,7 +7,7 @@ import lombok.Data;
  * fileName       : Criteria
  * author         : Mr.Lee
  * date           : 2023-12-05
- * description    :
+ * description    : 페이징에 사용 객체
  * ===========================================================
  * DATE              AUTHOR             NOTE
  * -----------------------------------------------------------
@@ -16,12 +16,9 @@ import lombok.Data;
 public class Criteria {
     private int page;
     private int perPageNum;
-
-    private String searchCustName;
-
     public Criteria(){
         this.page = 1;
-        this.perPageNum = 10;
+        this.perPageNum = 20;
     }
 
     public void setPage(int page){
@@ -34,8 +31,8 @@ public class Criteria {
     }
 
     public void setPerPageNum(int perPageNum){
-        if(perPageNum <= 0 || perPageNum > 100){
-            this.perPageNum = 10;
+        if(perPageNum <= 0){
+            this.perPageNum = 20;
             return;
         }
 
@@ -52,14 +49,6 @@ public class Criteria {
 
     public int getPerPageNum(){
         return this.perPageNum;
-    }
-
-    public void setSearchCustName(String searchCustName) {
-        this.searchCustName = searchCustName;
-    }
-
-    public String getSearchCustName(){
-        return this.searchCustName;
     }
 
     @Override

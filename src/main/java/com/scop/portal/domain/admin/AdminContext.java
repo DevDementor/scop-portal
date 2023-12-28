@@ -1,5 +1,6 @@
 package com.scop.portal.domain.admin;
 
+import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.User;
@@ -17,6 +18,7 @@ import java.util.Collection;
  * -----------------------------------------------------------
  * 2023-12-20        Mr.Lee      최초 생성
  */
+@Getter
 public class AdminContext extends User {
     private Admin admin;
 

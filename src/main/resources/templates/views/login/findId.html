@@ -42,9 +42,9 @@
         </div>
     </div>
     <script th:inline="javascript">
-        //spring message 값 변수 선언
-        let msgErrorId = /*[[#{msg.findId.error.userEmail}]]*/'';
-        let msgErrorPW = /*[[#{msg.findId.error.userName}]]*/'';
+        //spring message 변수 선언
+        const msgErrorId = /*[[#{msg.findId.error.userEmail}]]*/'';
+        const msgErrorPW = /*[[#{msg.findId.error.userName}]]*/'';
 
     </script>
     <script th:src="@{/scripts/login/findId.js}"></script>

@@ -1,0 +1,111 @@
+<!DOCTYPE HTML>
+<html
+        layout:decorate="~{/views/layout/listLayout}"
+        xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+        xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>고객사 리스트</title>
+</head>
+<th:block layout:fragment="content">
+    <div class="page_title">
+        <p class="path"><span>홈</span><span class="path_01">고객사 관리</span></p> <!-- 텍스트가 동일한 LNB 메뉴가 자동 활성화됨 -->
+        <h2 class="h2">고객사 관리</h2>
+    </div>
+    <!-- //page_title -->
+
+    <div class="content">
+        <form method="post" th:action="@{/customer/regCustomer}" th:object="${custComp}">
+            <div class="cont_box">
+                <div class="detail_wrap type_02">
+                    <div class="detail_area">
+                        <div class="detail_top">
+                            <h3>기본 정보</h3>
+                            <span class="info_text_01"><em>*</em> 표시된 항목은 필수입니다.</span>
+                        </div>
+                        <div class="table type_01 detail">
+                            <table>
+                                <caption>기본 정보 수정</caption>
+                                <tbody>
+                                <tr>
+                                    <th scope="row">고객사 명<em>*</em></th>
+                                    <td>
+                                        <div class="input type_01 l">
+                                            <input placeholder="" th:field="*{custCompNm}" type="text">
+                                        </div>
+                                        <button class="btn type_04" th:onclick="idDupChk()" type="button">중복확인</button>
+                                        <p class="error_msg" th:errors="*{custCompNm}"></p>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <th scope="row">담당자 이름<em>*</em></th>
+                                    <td>
+                                        <div class="input type_01 l">
+                                            <input placeholder="" th:field="*{cpsnNm}" type="text">
+                                        </div>
+                                        <p class="error_msg" th:errors="*{cpsnNm}"></p>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <th scope="row">담당자 연락처<em>*</em></th>
+                                    <td>
+                                        <div class="input type_01 l">
+                                            <input placeholder="" th:field="*{cpsnTelNo}" type="text">
+                                        </div>
+                                        <p class="error_msg" th:errors="*{cpsnTelNo}"></p>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <th scope="row">담당자 이메일<em>*</em></th>
+                                    <td>
+                                        <div class="input type_01 l">
+                                            <input placeholder="" th:field="*{cpsnEmail}" type="text">
+                                        </div>
+                                        <p class="error_msg" th:errors="*{cpsnEmail}"></p>
+                                    </td>
+                                </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                    <div class="detail_area">
+                        <div class="detail_top">
+                            <h3>부가 정보</h3>
+                        </div>
+                        <div class="table type_01 detail">
+                            <table>
+                                <caption>부가 정보 수정</caption>
+                                <tbody>
+                                <tr>
+                                    <th scope="row">메모</th>
+                                    <td>
+                                        <div class="textarea type_01">
+                                            <textarea placeholder="" rows="2" th:field="*{custCompMemoCtt}"></textarea>
+                                        </div>
+                                    </td>
+                                </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="detail_btn_area">
+                <button class="btn type_01">취소</button>
+                <button class="btn type_01 primary" th:onclick="saveCust()">저장</button>
+            </div>
+        </form>
+    </div>
+
+    <script th:inline="javascript">
+        //spring message 변수 선언
+        const msgIdDupChkError = /*[[#{msg.idDupChk.error.custCompNm}]]*/'';
+        const msgIdDupChkSuccess = /*[[#{msg.idDupChk.success.custCompNm}]]*/'';
+
+        //중복확인 체크 변수
+        let chkDupId = false;
+    </script>
+    <script th:src="@{/scripts/customer/regCustomer.js}"></script>
+</th:block>
+
+</html>

@@ -1,7 +1,8 @@
 package com.scop.portal.service.customer;
 
-import com.scop.portal.domain.customer.Customer;
-import com.scop.portal.utils.page.Criteria;
+import com.scop.portal.domain.common.search.CustSearchCriteria;
+import com.scop.portal.domain.customer.CustComp;
+import com.scop.portal.domain.common.page.Criteria;
 
 import java.util.List;
 
@@ -17,9 +18,13 @@ import java.util.List;
  * 2023-12-05        Mr.Lee      최초 생성
  */
 public interface CustomerService {
-    List<Customer> customerList(Criteria criteria);
+    List<CustComp> customerList(CustSearchCriteria criteria);
 
-    int customerCount(Criteria criteria);
+    int customerCount(CustSearchCriteria criteria);
 
-    Customer readCustomer(String customerId);
+    void insertCustComp(CustComp custComp);
+
+    CustComp readCustomer(String custCompId);
+
+    boolean idDupChk(String custCompNm);
 }

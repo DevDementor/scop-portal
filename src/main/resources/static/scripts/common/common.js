@@ -73,3 +73,48 @@ function initDate() {
     $('input[name=startDate]').val(startDate);
     $('input[name=endDate]').val(endDate);
 }
+
+
+/**
+ * layerPop방식 팝업호출
+ * @param url
+ * @param name
+ * @param params
+ */
+function openLayerPopPost(url, div, params, callBack) {
+    ajaxPost(url, params, function(getData) {
+        console.log(getData);
+
+        $("#pkstSelPop").modal();
+    });
+}
+
+/**
+ * layerPop 닫기
+ * @param url
+ * @param name
+ * @param params
+ */
+function openLayerPopClose(div) {
+    $("[id='"+div+"']").remove();
+    if($('.modal_wrap.open').length<=0){
+        $('body').removeClass('modal_open');
+    }
+}
+
+function openModal ( id ){
+    var zIndex = 1000;
+    if($('.modal_wrap.open').length>0){
+        $('.modal_wrap.open').each(function(){
+            zIndex =  zIndex > $(this).css('zIndex') ? zIndex : $(this).css('zIndex');
+        });
+        // $('body').addClass('modal_open');
+        $(id).addClass('open').css('zIndex',parseInt(zIndex)+10);
+    }else{
+        if($(id).is('.modal_alert') == false){
+            $('body').addClass('modal_open');
+        }
+        $(id).addClass('open');
+    }
+
+}

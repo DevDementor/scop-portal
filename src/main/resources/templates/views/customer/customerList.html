@@ -140,7 +140,7 @@
                     <td th:text="${custComp.stmFrstRegUserId}"></td>
                     <td th:text="${custComp.cpsnTelNo}"></td>
                     <td class="tac">
-                        <button class="btn type_07" type="button">조회</button>
+                        <button class="btn type_07" type="button" th:onclick="openPkstSelPop([[${custComp.custCompNm}]])">조회</button>
                     </td>
                     <td class="tac">
                         <button class="btn type_07 secondary" type="button">설정</button>

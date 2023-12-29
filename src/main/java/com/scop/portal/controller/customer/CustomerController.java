@@ -1,5 +1,6 @@
 package com.scop.portal.controller.customer;
 
+import com.scop.portal.domain.common.page.Criteria;
 import com.scop.portal.domain.common.page.PageMaker;
 import com.scop.portal.domain.common.search.CustSearchCriteria;
 import com.scop.portal.domain.customer.CustComp;
@@ -73,6 +74,16 @@ public class CustomerController {
         log.info("params={}", params);
         return customerService.idDupChk((String) params.get("custCompNm"));
     }
+
+    // TODO: 2023-12-28 레이어 팝업 테스트..후에는 주차장 관리 쪽 Controller로 빼자
+    @GetMapping("/layer/pkstSelPop")
+    public String pkstSelPop(@RequestParam Map<String, Object> params, CustSearchCriteria criteria, Model model){
+        log.info("pkstSelPop");
+        model.addAttribute("list", customerService.customerList(criteria));
+
+        return viewUrl + "/pkstSelPop";
+    }
+
 }
 
 

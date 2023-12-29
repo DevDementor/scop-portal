@@ -1,0 +1,98 @@
+<div class="modal" data-backdrop="static" id="pkstSelPop" keyboard="false" role="dialog">
+    <!--bootstrap 클래스명 .modal 사용해야 작동됨 -->
+    <div class="modal-dialog m" role="document"> <!--bootstrap 클래스명 .modal-dialog 사용해야 작동됨 -->
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title">주차장 조회</h4>
+                <button class="close btn icon stooltip" data-dismiss="modal" type="button">
+                    <span aria-hidden="true" class="icon_close_large"></span>
+                    <span>닫기</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="search_area">
+                    <div class="search_row_01"> <!-- 줄바꿈 없이 1줄 고정 -->
+                        <div class="search_item">
+                            <label>주차장 아이디</label>
+                            <div class="input type_02 s">
+                                <input placeholder="검색어 입력" type="text">
+                            </div>
+                        </div>
+                        <div class="search_item">
+                            <label>주차장 이름</label>
+                            <div class="input type_02 s">
+                                <input placeholder="검색어 입력" type="text">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="search_btn_area">
+                        <button class="btn type_03" type="button"><span>검색</span></button>
+                        <button class="btn icon stooltip" type="button">
+                            <span aria-hidden="true" class="icon_undo"></span>
+                            <span>초기화</span>
+                        </button>
+                    </div>
+                </div>
+
+                <div class="list_top_area">
+                    <div class="top_left">
+                        <span class="result_total"><b>Search Result : </b><em>123</em> rows</span>
+                    </div>
+                    <div class="top_right">
+                        <div class="pagination">
+                            <ul>
+                                <li><a class="btn first" href="#none"><span>처음</span></a></li>
+                                <li><a class="btn before" href="#none"><span>이전</span></a></li>
+                                <li><a class="on" href="#none"><span>1</span></a></li>
+                                <li><a href="#none"><span>200</span></a></li>
+                                <li><a href="#none"><span>300</span></a></li>
+                                <li><a href="#none"><span>400</span></a></li>
+                                <li><a href="#none"><span>500</span></a></li>
+                                <li><a class="btn next" href="#none"><span>다음</span></a></li>
+                                <li><a class="btn last" href="#none"><span>마지막</span></a></li>
+                            </ul>
+                        </div>
+                    </div>
+
+                </div>
+                <div class="table type_02 y_scroll">
+                    <table>
+                        <caption>주차장 목록</caption>
+                        <thead>
+                        <tr>
+                            <th scope="col">등록일시</th>
+                            <th scope="col">주차장 아이디</th>
+                            <th scope="col">주차장 이름</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr th:each="custComp : ${list}">
+                            <td th:text="${custComp.stmFrstRegDtm}"></td>
+                            <td th:text="${custComp.custCompNm}"></td>
+                            <td th:text="${custComp.custCompNm}"></td>
+                        </tr>
+
+                        </tbody>
+                    </table>
+                </div>
+
+                <!-- Loading -->
+                <!-- <div class="table type_02">
+                    <div class="table_info">
+                        <div class="loading type_02"><i></i><span class="hidden">Loading</span></div>
+                    </div>
+                </div> -->
+
+                <!-- No Data -->
+                <!-- <div class="table type_02">
+                    <div class="table_info">
+                        <div class="no_data">조건에 맞는 검색 결과가 없습니다.</div>
+                    </div>
+                </div> -->
+            </div>
+            <div class="modal-footer">
+                <button class="btn type_02 primary close" data-dismiss="modal" type="button" id="btnCloseModal">확인</button>
+            </div>
+        </div><!-- /.modal-content -->
+    </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->

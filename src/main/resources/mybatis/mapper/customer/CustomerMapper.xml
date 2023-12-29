@@ -36,8 +36,10 @@
     </select>
 
     <insert id="insertCustComp" parameterType="CustComp">
-        insert into cust_comp( cust_comp_id
-                             , cust_comp_nm
+        insert into cust_comp(
+-- cust_comp_id
+--                              ,
+                              cust_comp_nm
                              , cpsn_nm
                              , cpsn_tel_no
                              , cust_comp_memo_ctt
@@ -46,8 +48,10 @@
                              , STM_FRST_REG_DTM
                              , STM_LAST_MOD_USER_ID
                              , STM_LAST_MOD_DTM)
-        values ( (SELECT NEXTVAL('my_sequence'))
-               , #{custCompNm}
+        values (
+--                 (SELECT NEXTVAL('my_sequence'))
+--                ,
+                #{custCompNm}
                , #{cpsnNm}
                , #{cpsnTelNo}
                , #{custCompMemoCtt}
